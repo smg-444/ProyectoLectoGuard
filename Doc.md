@@ -213,6 +213,7 @@ classDiagram
 
 ---
 
+<<<<<<< HEAD
 ## Diagrama de Despliegue
 
 ```mermaid
@@ -398,3 +399,20 @@ fun `valid email returns true`() {
 - La app está optimizada para funcionar tanto online (Firebase) como offline (Room).
 - El feedback visual y la validación de formularios están implementados en todos los flujos críticos.
 - El diseño sigue una gama de colores accesible y moderna.
+
+
+## CAPTURAS DE EJECUCION
+
+ <img src="https://i.imgur.com/O8sLdYq.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/2VmUikE.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/nqlBnXl.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/wk5fMzy.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/VUITp0r.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/rNa3RLA.png" alt="Coin" style="width: 180px; height: auto;">
+
+ <img src="https://i.imgur.com/7Xk0rZU.png" alt="Coin" style="width: 180px; height: auto;">
