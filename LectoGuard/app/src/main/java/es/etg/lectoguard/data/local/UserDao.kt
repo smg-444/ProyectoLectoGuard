@@ -10,6 +10,9 @@ interface UserDao {
     @Query("SELECT * FROM user WHERE email = :email AND password = :password")
     suspend fun login(email: String, password: String): UserEntity?
 
+    @Query("SELECT * FROM user WHERE email = :email")
+    suspend fun getUserByEmail(email: String): UserEntity?
+
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(user: UserEntity): Long
 

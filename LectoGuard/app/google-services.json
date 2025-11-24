@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "753952926923",
+    "firebase_url": "https://lectoguard-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lectoguard",
+    "storage_bucket": "lectoguard.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753952926923:android:64ac4087d3d38f03e9ff4e",
+        "android_client_info": {
+          "package_name": "es.etg.lectoguard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD4umxLNuJHl3dxAa8siJJ6yh8hUnELXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
