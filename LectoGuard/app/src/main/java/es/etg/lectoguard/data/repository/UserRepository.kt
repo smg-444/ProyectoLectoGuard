@@ -4,7 +4,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import es.etg.lectoguard.data.local.UserDao
 import es.etg.lectoguard.data.local.UserEntity
+import es.etg.lectoguard.data.remote.FollowService
 import es.etg.lectoguard.data.remote.UserProfileService
+import es.etg.lectoguard.domain.model.FollowCounts
 import es.etg.lectoguard.domain.model.UserProfile
 import kotlinx.coroutines.tasks.await
  
@@ -14,6 +16,7 @@ class UserRepository(
     private val firestore: FirebaseFirestore
 ) {
     private val profileService by lazy { UserProfileService(firestore) }
+    private val followService by lazy { FollowService(firestore) }
 
     suspend fun login(email: String, password: String): UserEntity? {
         auth.signInWithEmailAndPassword(email, password).await()
@@ -61,4 +64,21 @@ class UserRepository(
     suspend fun getUserById(id: Int) = userDao.getUserById(id)
 
     suspend fun getRemoteProfile(uid: String) = profileService.getProfile(uid)
+
+    suspend fun updateUserProfile(profile: UserProfile) = profileService.upsertProfile(profile)
+
+    suspend fun followUser(selfUid: String, targetUid: String) =
+        followService.follow(selfUid, targetUid)
+
+    suspend fun unfollowUser(selfUid: String, targetUid: String) =
+        followService.unfollow(selfUid, targetUid)
+
+    suspend fun isFollowing(selfUid: String, targetUid: String) =
+        followService.isFollowing(selfUid, targetUid)
+
+    suspend fun getFollowCounts(uid: String): FollowCounts =
+        FollowCounts(
+            followers = followService.getFollowersCount(uid),
+            following = followService.getFollowingCount(uid)
+        )
 } 

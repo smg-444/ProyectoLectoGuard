@@ -12,6 +12,11 @@ import es.etg.lectoguard.data.local.LectoGuardDatabase
 import es.etg.lectoguard.data.repository.UserRepository
 import es.etg.lectoguard.domain.usecase.LoginUseCase
 import es.etg.lectoguard.domain.usecase.RegisterUseCase
+import es.etg.lectoguard.domain.usecase.IsFollowingUseCase
+import es.etg.lectoguard.domain.usecase.GetFollowCountsUseCase
+import es.etg.lectoguard.domain.usecase.FollowUserUseCase
+import es.etg.lectoguard.domain.usecase.UnfollowUserUseCase
+import es.etg.lectoguard.domain.usecase.UpdateUserProfileUseCase
 import es.etg.lectoguard.ui.viewmodel.UserViewModel
 import es.etg.lectoguard.utils.PrefsHelper
 import kotlinx.coroutines.CoroutineScope
@@ -31,19 +36,36 @@ class ProfileActivity : AppCompatActivity() {
         val userRepository = UserRepository(db.userDao(), FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
         userViewModel = UserViewModel(
             LoginUseCase(userRepository),
-            RegisterUseCase(userRepository)
+            RegisterUseCase(userRepository),
+            IsFollowingUseCase(userRepository),
+            GetFollowCountsUseCase(userRepository),
+            FollowUserUseCase(userRepository),
+            UnfollowUserUseCase(userRepository),
+            UpdateUserProfileUseCase(userRepository)
         )
 
-        val uid = PrefsHelper.getFirebaseUid(this) ?: FirebaseAuth.getInstance().currentUser?.uid
-        if (uid != null) {
+        val selfUid = PrefsHelper.getFirebaseUid(this) ?: FirebaseAuth.getInstance().currentUser?.uid
+        val targetUid = selfUid // en esta pantalla mostramos nuestro propio perfil
+
+        if (selfUid != null) {
             CoroutineScope(Dispatchers.Main).launch {
-                val profile = userRepository.getRemoteProfile(uid)
+                val profile = userRepository.getRemoteProfile(selfUid)
                 if (profile != null) {
                     binding.tvEmail.text = profile.email
                     binding.tvPhone.text = "" // no en perfil remoto aún
                     binding.tvSignupDate.text = profile.createdAt.toString()
                 }
             }
+            // Cargar conteos de follow
+            userViewModel.loadFollowState(selfUid, targetUid!!)
+            userViewModel.followersCount.observe(this) { count ->
+                binding.tvFollowers.text = "Seguidores: ${count ?: 0}"
+            }
+            userViewModel.followingCount.observe(this) { count ->
+                binding.tvFollowing.text = "Siguiendo: ${count ?: 0}"
+            }
+            // Si es nuestro perfil, ocultar botón de seguir
+            binding.btnFollowToggle.visibility = android.view.View.GONE
         }
 
         binding.btnLogout.setOnClickListener {
