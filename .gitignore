@@ -1,0 +1,52 @@
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio/IntelliJ
+.idea/
+*.iml
+.DS_Store
+
+# Local config
+local.properties
+*.keystore
+*.jks
+
+# Firebase config (no se sube)
+app/google-services.json
+
+# Capturas/outputs
+captures/
+*.apk
+*.aab
+*.ap_
+
+# NDK/External
+.externalNativeBuild/
+.cxx/
+
+# Kotlin/Java
+*.class
+*.log
+
+# Misc
+/.project
+/.settings/
+/.classpath
+
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
