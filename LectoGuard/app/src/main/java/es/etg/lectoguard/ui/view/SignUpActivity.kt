@@ -3,6 +3,8 @@ package es.etg.lectoguard.ui.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import es.etg.lectoguard.R
 import es.etg.lectoguard.databinding.ActivitySignUpBinding
 import es.etg.lectoguard.data.local.LectoGuardDatabase
@@ -22,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val db = LectoGuardDatabase.getInstance(this)
-        val userRepository = UserRepository(db.userDao())
+        val userRepository = UserRepository(db.userDao(), FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
         userViewModel = UserViewModel(
             LoginUseCase(userRepository),
             RegisterUseCase(userRepository)
