@@ -43,6 +43,17 @@ class FollowService(
         }
     }
 
+    suspend fun getFollowingList(uid: String): List<String> {
+        return try {
+            val snaps = followingCollection(uid).get().await()
+            snaps.documents.mapNotNull { doc ->
+                doc.data?.get("targetUid") as? String
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
     suspend fun getFollowersCount(uid: String): Int {
         // Consulta collectionGroup 'following' filtrando por campo 'targetUid'
         return try {
@@ -50,8 +61,12 @@ class FollowService(
                 .whereEqualTo("targetUid", uid)
                 .get()
                 .await()
-            snaps.size()
+            val count = snaps.size()
+            android.util.Log.d("FollowService", "getFollowersCount para $uid: $count")
+            count
         } catch (e: Exception) {
+            android.util.Log.e("FollowService", "Error obteniendo seguidores para $uid: ${e.message}")
+            e.printStackTrace()
             0
         }
     }

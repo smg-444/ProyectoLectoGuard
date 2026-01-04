@@ -7,6 +7,7 @@ object PrefsHelper {
     private const val KEY_USER_ID = "user_id"
     private const val KEY_USER_NAME = "user_name"
     private const val KEY_FIREBASE_UID = "firebase_uid"
+    private const val KEY_DARK_MODE = "dark_mode"
 
     fun saveUser(context: Context, id: Int, name: String) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -22,6 +23,15 @@ object PrefsHelper {
     }
     fun getFirebaseUid(context: Context): String? =
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getString(KEY_FIREBASE_UID, null)
+
+    fun setDarkMode(context: Context, enabled: Boolean) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putBoolean(KEY_DARK_MODE, enabled).apply()
+    }
+
+    fun isDarkModeEnabled(context: Context): Boolean {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getBoolean(KEY_DARK_MODE, false)
+    }
 
     fun clear(context: Context) = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
 } 

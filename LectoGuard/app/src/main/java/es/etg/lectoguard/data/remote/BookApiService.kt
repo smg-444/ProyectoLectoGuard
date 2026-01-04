@@ -9,7 +9,8 @@ data class BookDetailResponse(
     val title: String = "",
     val coverImage: String = "",
     val sinopsis: String = "",
-    val firstPage: String = ""
+    val firstPage: String = "",
+    val genres: List<String> = emptyList() // Géneros del libro desde Realtime Database
 )
 
 interface BookApiService {
@@ -18,4 +19,9 @@ interface BookApiService {
 
     @GET("libros/{id}.json")
     suspend fun getBookDetail(@Path("id") id: Int): Response<BookDetailResponse>
+    
+    // Realtime Database devuelve arrays como [null, {...}, {...}, ...]
+    // Usamos List<Any?> porque Realtime Database devuelve un array JSON directamente
+    @GET("libros.json")
+    suspend fun getAllBooks(): Response<List<Any?>>
 }

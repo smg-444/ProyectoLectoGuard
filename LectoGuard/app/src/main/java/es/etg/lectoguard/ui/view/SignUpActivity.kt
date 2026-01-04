@@ -2,33 +2,22 @@ package es.etg.lectoguard.ui.view
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.activity.viewModels
 import es.etg.lectoguard.R
 import es.etg.lectoguard.databinding.ActivitySignUpBinding
-import es.etg.lectoguard.data.local.LectoGuardDatabase
 import es.etg.lectoguard.data.local.UserEntity
-import es.etg.lectoguard.data.repository.UserRepository
-import es.etg.lectoguard.domain.usecase.LoginUseCase
-import es.etg.lectoguard.domain.usecase.RegisterUseCase
+import dagger.hilt.android.AndroidEntryPoint
 import es.etg.lectoguard.ui.viewmodel.UserViewModel
 
-class SignUpActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class SignUpActivity : BaseActivity() {
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var userViewModel: UserViewModel
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val db = LectoGuardDatabase.getInstance(this)
-        val userRepository = UserRepository(db.userDao(), FirebaseAuth.getInstance(), FirebaseFirestore.getInstance())
-        userViewModel = UserViewModel(
-            LoginUseCase(userRepository),
-            RegisterUseCase(userRepository)
-        )
 
         binding.btnSignUp.setOnClickListener {
             val name = binding.etName.text.toString().trim()

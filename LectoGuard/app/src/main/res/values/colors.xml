@@ -1,15 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1976D2</color>
-    <color name="colorSecondary">#64B5F6</color>
-    <color name="colorBackground">#F4F8FB</color>
-    <color name="colorOnPrimary">#1976D2</color>
-    <color name="colorOnBackground">#64B5F6</color>
-    <color name="colorAccent">#82B1FF</color>
-    <color name="colorCancel">#FF8282</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="blue">#80D8FF</color>
-    <color name="red">#FF0000</color>
-    <color name="buttonTextColor">#FFFFFF</color>
+    <!-- Paleta de colores principal - LectoGuard -->
+    
+    <!-- Colores primarios - Azul profundo inspirado en libros -->
+    <color name="colorPrimary">#2C3E50</color> <!-- Azul oscuro elegante -->
+    <color name="colorPrimaryDark">#1A252F</color> <!-- Versión más oscura -->
+    <color name="colorPrimaryLight">#34495E</color> <!-- Versión más clara -->
+    
+    <!-- Colores secundarios - Naranja cálido para acentos -->
+    <color name="colorSecondary">#E67E22</color> <!-- Naranja cálido -->
+    <color name="colorSecondaryDark">#D35400</color> <!-- Naranja oscuro -->
+    <color name="colorSecondaryLight">#F39C12</color> <!-- Naranja claro -->
+    
+    <!-- Colores de fondo -->
+    <color name="colorBackground">#F8F9FA</color> <!-- Gris muy claro -->
+    <color name="colorSurface">#FFFFFF</color> <!-- Blanco puro -->
+    <color name="colorSurfaceVariant">#E9ECEF</color> <!-- Gris claro -->
+    
+    <!-- Colores de texto -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- Blanco sobre primario -->
+    <color name="colorOnSecondary">#FFFFFF</color> <!-- Blanco sobre secundario -->
+    <color name="colorOnBackground">#212529</color> <!-- Gris muy oscuro sobre fondo -->
+    <color name="colorOnSurface">#212529</color> <!-- Gris muy oscuro sobre superficie -->
+    <color name="colorOnSurfaceVariant">#495057</color> <!-- Gris medio sobre superficie variante -->
+    
+    <!-- Colores de acento y acciones -->
+    <color name="colorAccent">#3498DB</color> <!-- Azul brillante para acentos -->
+    <color name="colorAccentVariant">#2980B9</color> <!-- Azul más oscuro -->
+    
+    <!-- Colores de estado -->
+    <color name="colorSuccess">#27AE60</color> <!-- Verde éxito -->
+    <color name="colorError">#E74C3C</color> <!-- Rojo error -->
+    <color name="colorWarning">#F39C12</color> <!-- Amarillo advertencia -->
+    <color name="colorInfo">#3498DB</color> <!-- Azul información -->
+    
+    <!-- Colores de acción -->
+    <color name="colorCancel">#95A5A6</color> <!-- Gris para cancelar -->
+    <color name="colorDelete">#E74C3C</color> <!-- Rojo para eliminar -->
+    <color name="colorEdit">#3498DB</color> <!-- Azul para editar -->
+    <color name="colorSave">#27AE60</color> <!-- Verde para guardar -->
+    
+    <!-- Colores de lectura -->
+    <color name="colorReading">#3498DB</color> <!-- Azul para "Leyendo" -->
+    <color name="colorRead">#27AE60</color> <!-- Verde para "Leído" -->
+    <color name="colorWantToRead">#F39C12</color> <!-- Amarillo para "Quiero leer" -->
+    <color name="colorAbandoned">#E74C3C</color> <!-- Rojo para "Abandonado" -->
+    
+    <!-- Colores básicos -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#3498DB</color> <!-- Azul para botones y acentos -->
+    <color name="buttonTextColor">#FFFFFF</color> <!-- Color de texto para botones -->
+    
+    <!-- Colores de chips y tags -->
+    <color name="chipBackground">#E8F4F8</color> <!-- Fondo claro para chips -->
+    <color name="chipText">#2C3E50</color> <!-- Texto oscuro para chips -->
+    
+    <!-- Colores de rating -->
+    <color name="ratingStarFilled">#F39C12</color> <!-- Amarillo para estrellas llenas -->
+    <color name="ratingStarEmpty">#BDC3C7</color> <!-- Gris para estrellas vacías -->
+    
+    <!-- Colores de lista -->
+    <color name="listItemBackground">#FFFFFF</color> <!-- Fondo de items de lista -->
+    <color name="listItemSelected">#E8F4F8</color> <!-- Fondo cuando está seleccionado -->
+    
+    <!-- Colores de borde -->
+    <color name="borderColor">#DEE2E6</color> <!-- Gris claro para bordes -->
+    <color name="dividerColor">#E9ECEF</color> <!-- Gris para divisores -->
 </resources>

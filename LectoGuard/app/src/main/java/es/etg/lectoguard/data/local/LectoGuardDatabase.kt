@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [UserEntity::class, BookEntity::class, UserBookEntity::class],
-    version = 1
+    entities = [UserEntity::class, BookEntity::class, UserBookEntity::class, ReadingListEntity::class],
+    version = 5
 )
 abstract class LectoGuardDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun bookDao(): BookDao
     abstract fun userBookDao(): UserBookDao
+    abstract fun readingListDao(): ReadingListDao
 
     companion object {
         @Volatile
@@ -20,11 +21,13 @@ abstract class LectoGuardDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): LectoGuardDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    LectoGuardDatabase::class.java,
-                    "lectoguard-db"
-                ).build()
+            val instance = Room.databaseBuilder(
+                context.applicationContext,
+                LectoGuardDatabase::class.java,
+                "lectoguard-db"
+            )
+            .fallbackToDestructiveMigration() // Para desarrollo, en producción usar migraciones
+            .build()
                 INSTANCE = instance
                 instance
             }
