@@ -1,3 +1,17 @@
+---
+
+# IES TIERNO GALVÁN – PARLA
+
+## LectoGuard - Plataforma Social para Amantes de la Lectura
+
+**Proyecto fin de Ciclo Formativo**
+
+**Autor:** Samy Mounaji Gouiss
+
+**Fecha:** 01/01/2026
+
+---
+
 # Aplicación LectoGuard - Documentación
 
 ## Índice
@@ -16,6 +30,7 @@
 - [Futuras Líneas de Investigación](#futuras-líneas-de-investigación)
 - [Problemas Encontrados](#problemas-encontrados)
 - [Opinión Personal](#opinión-personal)
+- [Capturas de Ejecución](#capturas-de-ejecución)
 - [Bibliografía](#bibliografía)
 
 ---
@@ -804,6 +819,33 @@ El desarrollo de LectoGuard ha sido una experiencia de aprendizaje que me ha per
 ### Reflexiones Finales
 
 El proyecto ha sido especialmente valioso para aprender sobre arquitectura de software, integración con servicios en la nube, y desarrollo de aplicaciones sociales. La experiencia adquirida será fundamental para futuros proyectos de desarrollo móvil.
+
+---
+
+## Capturas de Ejecución
+
+A continuación se presentan las capturas de pantalla de la aplicación LectoGuard en funcionamiento, mostrando las diferentes pantallas y funcionalidades implementadas:
+
+### Captura 1
+![Captura de Ejecución 1](CAPTURAS_EJECUCION/cap1.png)
+
+### Captura 2
+![Captura de Ejecución 2](CAPTURAS_EJECUCION/cap2.png)
+
+### Captura 3
+![Captura de Ejecución 3](CAPTURAS_EJECUCION/cap3.png)
+
+### Captura 4
+![Captura de Ejecución 4](CAPTURAS_EJECUCION/cap4.png)
+
+### Captura 5
+![Captura de Ejecución 5](CAPTURAS_EJECUCION/cap5.png)
+
+### Captura 6
+![Captura de Ejecución 6](CAPTURAS_EJECUCION/cap6.png)
+
+### Captura 7
+![Captura de Ejecución 7](CAPTURAS_EJECUCION/cap7.png)
 
 ---
 
