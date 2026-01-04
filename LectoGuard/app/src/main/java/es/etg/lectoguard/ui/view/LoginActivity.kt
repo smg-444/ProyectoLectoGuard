@@ -3,31 +3,25 @@ package es.etg.lectoguard.ui.view
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import es.etg.lectoguard.R
 import es.etg.lectoguard.databinding.ActivityLoginBinding
-import es.etg.lectoguard.data.local.LectoGuardDatabase
-import es.etg.lectoguard.data.repository.UserRepository
-import es.etg.lectoguard.domain.usecase.LoginUseCase
-import es.etg.lectoguard.domain.usecase.RegisterUseCase
 import es.etg.lectoguard.ui.viewmodel.UserViewModel
 import es.etg.lectoguard.utils.PrefsHelper
+import es.etg.lectoguard.utils.NavigationUtils
 
-class LoginActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var userViewModel: UserViewModel
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val db = LectoGuardDatabase.getInstance(this)
-        val userRepository = UserRepository(db.userDao())
-        userViewModel = UserViewModel(
-            LoginUseCase(userRepository),
-            RegisterUseCase(userRepository)
-        )
 
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
@@ -53,6 +47,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             if (valid) {
+                binding.btnLogin.isEnabled = false
+                binding.btnLogin.text = getString(R.string.logging_in)
                 userViewModel.login(email, password)
             } else {
                 Toast.makeText(this, getString(R.string.form_fix_errors), Toast.LENGTH_SHORT).show()
@@ -60,18 +56,30 @@ class LoginActivity : AppCompatActivity() {
         }
 
         userViewModel.loginResult.observe(this) { success ->
+            binding.btnLogin.isEnabled = true
+            binding.btnLogin.text = getString(R.string.login)
             if (success) {
-                val user = userViewModel.user.value!!
-                PrefsHelper.saveUser(this, user.id, user.name)
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
+                val user = userViewModel.user.value
+                if (user != null) {
+                    // Guardar datos del usuario de forma asíncrona
+                    PrefsHelper.saveUser(this, user.id, user.name)
+                    FirebaseAuth.getInstance().currentUser?.uid?.let { PrefsHelper.saveFirebaseUid(this, it) }
+                    // Solicitar y guardar token FCM después del login (en background)
+                    android.os.Handler(android.os.Looper.getMainLooper()).post {
+                        es.etg.lectoguard.utils.FCMHelper.requestAndSaveToken()
+                    }
+                    NavigationUtils.navigateToHome(this)
+                    finish()
+                } else {
+                    Toast.makeText(this, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, SignUpActivity::class.java))
+            NavigationUtils.navigateToSignUp(this)
         }
 
         binding.btnExit.setOnClickListener {

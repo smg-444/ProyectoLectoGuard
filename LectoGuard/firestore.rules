@@ -1,0 +1,207 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function para verificar autenticación
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function para verificar que el usuario es el propietario
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Colección de usuarios
+    match /users/{userId} {
+      // Cualquiera puede leer perfiles públicos
+      allow read: if isAuthenticated();
+      // Solo el propietario puede escribir su propio perfil
+      allow write: if isOwner(userId);
+    }
+    
+    // Colección de follows
+    match /follows/{userId}/following/{targetId} {
+      // Cualquiera autenticado puede leer
+      allow read: if isAuthenticated();
+      // Solo el propietario puede seguir/dejar de seguir
+      allow write: if isOwner(userId);
+    }
+    
+    // Collection group para obtener seguidores (collectionGroup("following"))
+    // Esta regla se aplica automáticamente a todas las subcolecciones "following"
+    // Permitimos leer si el usuario está autenticado
+    match /{path=**}/following/{targetId} {
+      allow read: if isAuthenticated();
+    }
+    
+    // Colección de valoraciones (ratings)
+    match /ratings/{ratingId} {
+      // Cualquiera autenticado puede leer valoraciones
+      allow read: if isAuthenticated();
+      // Cualquiera autenticado puede crear/actualizar su propia valoración
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      // Solo el propietario puede eliminar su valoración
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Colección de reseñas (reviews) - estructura directa
+    match /reviews/{reviewId} {
+      // Cualquiera autenticado puede leer reseñas
+      allow read: if isAuthenticated();
+      // Cualquiera autenticado puede crear reseñas (verificando que el userId coincida)
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      // Solo el autor puede actualizar su reseña
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // Solo el autor puede eliminar su reseña
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Colección de libros y sus subcolecciones
+    match /books/{bookId} {
+      // Cualquiera autenticado puede leer información de libros
+      allow read: if isAuthenticated();
+      
+      // Subcolección de reseñas (reviews) - estructura alternativa bajo books
+      match /reviews/{reviewId} {
+        // Cualquiera autenticado puede leer reseñas
+        allow read: if isAuthenticated();
+        // Cualquiera autenticado puede crear reseñas
+        allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+        // Solo el autor puede actualizar su reseña
+        allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+        // Solo el autor puede eliminar su reseña
+        allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      }
+      
+      // Subcolección de valoraciones por libro (si se usa esta estructura alternativa)
+      match /ratings/{ratingId} {
+        allow read: if isAuthenticated();
+        allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+        allow update: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+        allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      }
+    }
+    
+    // Colección de conversaciones (para chat)
+    match /conversations/{conversationId} {
+      // Leer: solo los participantes pueden leer
+      // Para consultas con whereArrayContains, Firestore evalúa esta regla para cada documento
+      allow read: if isAuthenticated() && 
+        request.auth.uid in resource.data.participants;
+      
+      // Crear: el usuario autenticado debe estar en los participantes
+      allow create: if isAuthenticated() && 
+        request.auth.uid in request.resource.data.participants;
+      
+      // Actualizar: solo los participantes pueden actualizar
+      allow update: if isAuthenticated() && 
+        (request.auth.uid in resource.data.participants);
+      
+      // Eliminar: solo los participantes pueden eliminar
+      allow delete: if isAuthenticated() && 
+        (request.auth.uid in resource.data.participants);
+      
+      // Subcolección de mensajes
+      match /messages/{messageId} {
+        // Leer: solo los participantes de la conversación pueden leer mensajes
+        allow read: if isAuthenticated() && 
+          (request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants);
+        
+        // Crear: el remitente debe ser el usuario autenticado y estar en los participantes
+        allow create: if isAuthenticated() && 
+          request.resource.data.senderId == request.auth.uid &&
+          (request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants);
+        
+        // Actualizar: 
+        // - El remitente puede actualizar cualquier campo de su mensaje
+        // - Cualquier participante puede actualizar el campo readBy para marcar mensajes como leídos
+        allow update: if isAuthenticated() && 
+          (
+            // El remitente puede actualizar su mensaje
+            resource.data.senderId == request.auth.uid ||
+            // O cualquier participante puede actualizar readBy
+            (
+              request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants &&
+              // Verificar que solo se está actualizando readBy (y posiblemente otros campos que no cambian el contenido)
+              request.resource.data.senderId == resource.data.senderId &&
+              request.resource.data.content == resource.data.content &&
+              request.resource.data.conversationId == resource.data.conversationId
+            )
+          );
+        
+        // Eliminar: solo el remitente puede eliminar su mensaje
+        allow delete: if isAuthenticated() && 
+          resource.data.senderId == request.auth.uid;
+      }
+    }
+    
+    // Colección de feeds (para actividad social)
+    match /feeds/{userId}/items/{itemId} {
+      // Leer: solo el propietario del feed puede leer sus items
+      allow read: if isAuthenticated() && isOwner(userId);
+      // Crear: cualquier usuario autenticado puede crear items en el feed de otros
+      // (esto permite que cuando alguien hace una acción, se cree en el feed de sus seguidores)
+      allow create: if isAuthenticated();
+      // Actualizar/Eliminar: solo el propietario del feed puede modificar sus items
+      allow update, delete: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // Colección de intereses de usuario (para recomendaciones)
+    match /user_interests/{userId} {
+      // Cualquier usuario autenticado puede leer intereses de otros (para recomendaciones)
+      allow read: if isAuthenticated();
+      // Solo el propietario puede escribir sus propios intereses
+      allow write: if isAuthenticated() && isOwner(userId);
+    }
+    
+    // Colección de libros guardados por usuario (para recomendaciones)
+    match /user_books/{bookId} {
+      // Cualquier usuario autenticado puede leer libros de otros (para recomendaciones)
+      allow read: if isAuthenticated();
+      // Solo el propietario puede escribir sus propios libros guardados
+      // El bookId tiene formato "userId_bookId", así que verificamos el userId en el documento
+      allow create: if isAuthenticated() && 
+        request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAuthenticated() && 
+        resource.data.userId == request.auth.uid;
+    }
+    
+    // Colección de listas de lectura personalizadas
+    match /reading_lists/{listId} {
+      // Leer: cualquier usuario puede leer listas públicas, solo el propietario puede leer sus listas privadas
+      allow read: if isAuthenticated() && (
+        !exists(/databases/$(database)/documents/reading_lists/$(listId)) ||
+        get(/databases/$(database)/documents/reading_lists/$(listId)).data.isPublic == true || 
+        get(/databases/$(database)/documents/reading_lists/$(listId)).data.userId == request.auth.uid
+      );
+      
+      // Crear: cualquier usuario autenticado puede crear listas (verificando que el userId coincida)
+      allow create: if isAuthenticated() && 
+        request.resource.data.userId == request.auth.uid;
+      
+      // Actualizar: solo el propietario puede actualizar su lista
+      allow update: if isAuthenticated() && 
+        resource.data.userId == request.auth.uid;
+      
+      // Eliminar: solo el propietario puede eliminar su lista
+      allow delete: if isAuthenticated() && 
+        resource.data.userId == request.auth.uid;
+      
+      // Subcolección de seguidores
+      match /followers/{followerId} {
+        // Cualquier usuario puede leer seguidores de listas públicas
+        allow read: if isAuthenticated();
+        // Cualquier usuario puede seguir/dejar de seguir listas
+        allow write: if isAuthenticated();
+      }
+    }
+    
+    // Denegar todo lo demás por defecto
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

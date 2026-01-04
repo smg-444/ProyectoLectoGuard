@@ -1,0 +1,166 @@
+{
+  "libros": {
+    "0": null,
+    "1": {
+      "id": 1,
+      "title": "El Quijote",
+      "coverImage": "https://media.gettyimages.com/id/1172200712/es/vector/don-quijote-y-sancho-panza.jpg?s=612x612&w=gi&k=20&c=MCfC-fRkJHKp-RZNPDKXsVxGGalsQMkUpN-cfi8V3qk=",
+      "sinopsis": "Esto sería una sinopsis del libro El Quijote",
+      "firstPage": "EN UN LUGAR de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.",
+      "genres": ["CLASSIC", "FICTION"]
+    },
+    "2": {
+      "id": 2,
+      "title": "Cien años de soledad",
+      "coverImage": "https://m.media-amazon.com/images/I/91TvVQS7loL.jpg",
+      "sinopsis": "Esto sería una sinopsis del libro Cien años de soledad",
+      "firstPage": "Todos los años, por el mes de marzo, una familia de gitanos desarrapados plantaba su carpa cerca de la aldea, y con un grande alboroto de pitos y timbales daban ...",
+      "genres": ["FICTION", "MAGICAL_REALISM"]
+    },
+    "3": {
+      "id": 3,
+      "title": "La sombra del viento",
+      "coverImage": "https://www.planetadelibros.com/usuaris/libros/fotos/222/original/portada___201609051317.jpg",
+      "sinopsis": "Esto sería una sinopsis del libro La sombra del viento",
+      "firstPage": "Todavía recuerdo aquel amanecer en que mi padre me llevó por primera vez a visitar el Cementerio de los Libros Olvidados. Desgranaban los primeros.",
+      "genres": ["MYSTERY", "THRILLER", "FICTION"]
+    },
+    "4": {
+      "id": 4,
+      "title": "El Hobbit",
+      "coverImage": "https://www.planetadelibros.com/usuaris/libros/fotos/413/original/portada_el-hobbit_j-r-r-tolkien_202411061159.jpg",
+      "sinopsis": "La historia de Bilbo Bolsón y su aventura épica para recuperar el tesoro de los enanos.",
+      "firstPage": "En un agujero en el suelo vivía un hobbit. No un agujero húmedo, sucio, repugnante, con restos de gusanos y olor a fango, ni tampoco un agujero seco, desnudo y arenoso, sin nada en que sentarse o que comer: era un agujero-hobbit, y eso significa comodidad.",
+      "genres": ["FANTASY", "ADVENTURE"]
+    },
+    "5": {
+      "id": 5,
+      "title": "El Señor de los Anillos: La Comunidad del Anillo",
+      "coverImage": "https://m.media-amazon.com/images/I/816QLZKwmIL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La épica aventura de Frodo Bolsón para destruir el Anillo Único.",
+      "firstPage": "Cuando el señor Bilbo Bolsón de Bolsón Cerrado anunció que muy pronto celebraría su cumpleaños ciento once con una fiesta de especial magnificencia, hubo muchos comentarios y expectación en la Comarca.",
+      "genres": ["FANTASY", "ADVENTURE"]
+    },
+    "6": {
+      "id": 6,
+      "title": "Historia de dos ciudades",
+      "coverImage": "https://m.media-amazon.com/images/I/81almnjTMzL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "Una historia épica ambientada durante la Revolución Francesa que sigue las vidas de varios personajes.",
+      "firstPage": "Era el mejor de los tiempos, era el peor de los tiempos, era la época de la sabiduría, era la época de la locura, era la época de la fe, era la época de la incredulidad.",
+      "genres": ["HISTORICAL", "CLASSIC", "FICTION"]
+    },
+    "7": {
+      "id": 7,
+      "title": "Moby Dick",
+      "coverImage": "https://images.cdn1.buscalibre.com/fit-in/360x360/b5/89/b589be02f650868192cc4bc0c876ea31.jpg",
+      "sinopsis": "La obsesiva búsqueda del capitán Ahab por la ballena blanca Moby Dick.",
+      "firstPage": "Llamadme Ismael. Hace algunos años -no importa cuántos exactamente-, teniendo poco o ningún dinero en el bolsillo, y nada en particular que me interesara en tierra, pensé en navegar un poco y ver la parte acuática del mundo.",
+      "genres": ["CLASSIC", "ADVENTURE", "FICTION"]
+    },
+    "8": {
+      "id": 8,
+      "title": "Metro 2033",
+      "coverImage": "https://m.media-amazon.com/images/I/71huuEFXaLL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "Metro 2033 cuenta la historia de Artyom, un joven que debe viajar por la red del metro de Moscú, ahora habitada por estaciones-ciudades y mutantes, para avisar de una amenaza que pone en peligro a toda la humanidad subterránea tras una guerra nuclear.",
+      "firstPage": "comienza con el protagonista, Artyom, sentado en una estación, a punto de escuchar una historia escalofriante sobre desapariciones en la estación Poleshayevskaya, un relato que ya conoce pero que le sigue causando terror, revelando el ambiente sombrío y peligroso del metro de Moscú. ",
+      "genres": ["THRILLER", "FICTION"]
+    },
+    "9": {
+      "id": 9,
+      "title": "El Principito",
+      "coverImage": "https://m.media-amazon.com/images/I/71AVK5VIAzL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La historia de un joven príncipe que viaja por diferentes planetas y aprende sobre la vida.",
+      "firstPage": "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.",
+      "genres": ["CHILDREN", "PHILOSOPHY", "FICTION"]
+    },
+    "10": {
+      "id": 10,
+      "title": "1984",
+      "coverImage": "https://www.marcialpons.es/media/img/portadas/2024/4/4/9788423365050.jpg",
+      "sinopsis": "Una distopía sobre un futuro totalitario donde el Gran Hermano controla todo.",
+      "firstPage": "Era una tarde fría y húmeda de abril y los relojes daban las trece. Winston Smith, con la barbilla clavada en el pecho en su esfuerzo por esquivar el viento, se deslizó rápidamente por entre las puertas de cristal de las Casas de la Victoria.",
+      "genres": ["SCIENCE_FICTION", "THRILLER", "CLASSIC"]
+    },
+    "11": {
+      "id": 11,
+      "title": "Fahrenheit 451",
+      "coverImage": "https://m.media-amazon.com/images/I/71erWNLpZGL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "Una distopía sobre una sociedad futura donde los libros están prohibidos y los bomberos los queman.",
+      "firstPage": "Era un día brillante y frío de abril y los relojes daban las trece. Winston Smith, con la barbilla clavada en el pecho en su esfuerzo por esquivar el viento, se deslizó rápidamente por entre las puertas de cristal de las Casas de la Victoria.",
+      "genres": ["SCIENCE_FICTION", "THRILLER", "CLASSIC"]
+    },
+    "12": {
+      "id": 12,
+      "title": "Harry Potter y la piedra filosofal",
+      "coverImage": "https://m.media-amazon.com/images/I/81M7LcLTUdL.jpg",
+      "sinopsis": "La historia de un joven mago que descubre su destino en el mundo mágico de Hogwarts.",
+      "firstPage": "El señor y la señora Dursley, que vivían en el número 4 de Privet Drive, estaban orgullosos de decir que eran muy normales, afortunadamente. Eran las últimas personas que se esperaría que se relacionaran con algo extraño o misterioso.",
+      "genres": ["FANTASY", "YOUNG_ADULT", "ADVENTURE"]
+    },
+    "13": {
+      "id": 13,
+      "title": "La vuelta al mundo en 80 días",
+      "coverImage": "https://m.media-amazon.com/images/I/61nilx1089L._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La aventura de Phileas Fogg y su mayordomo Passepartout para dar la vuelta al mundo en 80 días.",
+      "firstPage": "En el año 1872, la casa número 7 de Saville Row, Burlington Gardens -la casa en la que murió Sheridan en 1816- estaba habitada por Phileas Fogg, esq., uno de los miembros más notables y singulares del Reform Club de Londres.",
+      "genres": ["ADVENTURE", "FICTION", "CLASSIC"]
+    },
+    "14": {
+      "id": 14,
+      "title": "Veinte mil leguas de viaje submarino",
+      "coverImage": "https://images.cdn2.buscalibre.com/fit-in/360x360/56/6f/566fd75ec4d91b49cc4736fe686ce05e.jpg",
+      "sinopsis": "La aventura del profesor Aronnax y su búsqueda de un misterioso monstruo marino.",
+      "firstPage": "Era el año 1866 y se había producido un fenómeno inexplicable y misterioso que nadie había podido olvidar. No se hablaba de otra cosa en los puertos y en los círculos marítimos, y en el público en general.",
+      "genres": ["SCIENCE_FICTION", "ADVENTURE", "CLASSIC"]
+    },
+    "15": {
+      "id": 15,
+      "title": "Viaje al centro de la Tierra",
+      "coverImage": "https://m.media-amazon.com/images/I/81t25EnxIBL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La historia de un joven que viaja al centro de la Tierra a través de un volcán islandés.",
+      "firstPage": "En el año 1872, la casa número 7 de Saville Row, Burlington Gardens -la casa en la que murió Sheridan en 1816- estaba habitada por Phileas Fogg, esq., uno de los miembros más notables y singulares del Reform Club de Londres.",
+      "genres": ["SCIENCE_FICTION", "ADVENTURE", "CLASSIC"]
+    },
+    "16": {
+      "id": 16,
+      "title": "Las aventuras de Sherlock Holmes",
+      "coverImage": "https://m.media-amazon.com/images/I/616WwFxHckL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La historia del detective más famoso del mundo y su compañero el doctor Watson.",
+      "firstPage": "Era una noche oscura y tormentosa. La lluvia caía a cántaros sobre las calles de Londres, y el viento soplaba con furia, haciendo que las farolas se balancearan peligrosamente.",
+      "genres": ["MYSTERY", "THRILLER", "CLASSIC"]
+    },
+    "17": {
+      "id": 17,
+      "title": "El Conde de Montecristo",
+      "coverImage": "https://www.castalia.es/img/books/9788497408264.jpg",
+      "sinopsis": "La historia de un joven que busca venganza después de ser injustamente encarcelado.",
+      "firstPage": "Era el mejor de los tiempos, era el peor de los tiempos, era la época de la sabiduría, era la época de la locura, era la época de la fe, era la época de la incredulidad.",
+      "genres": ["ADVENTURE", "HISTORICAL", "CLASSIC"]
+    },
+    "18": {
+      "id": 18,
+      "title": "El camino",
+      "coverImage": "https://m.media-amazon.com/images/I/71K04p+9SfL._UF1000,1000_QL80_.jpg",
+      "sinopsis": "La historia de un joven que lucha por sobrevivir en un mundo post-apocalíptico.",
+      "firstPage": "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.",
+      "genres": ["SCIENCE_FICTION", "ADVENTURE", "FICTION"]
+    },
+    "19": {
+      "id": 19,
+      "title": "Rebelión en la granja",
+      "coverImage": "https://www.planetadelibros.com/usuaris/libros/fotos/330/original/portada_rebelion-en-la-granja_george-orwell_202104141022.jpg",
+      "sinopsis": "Una historia sobre la amistad, el amor y la pérdida en un mundo donde los animales hablan.",
+      "firstPage": "Era una tarde fría y húmeda de abril y los relojes daban las trece. Winston Smith, con la barbilla clavada en el pecho en su esfuerzo por esquivar el viento, se deslizó rápidamente por entre las puertas de cristal de las Casas de la Victoria.",
+      "genres": ["FICTION", "CLASSIC", "SATIRE"]
+    },
+    "20": {
+      "id": 20,
+      "title": "Las crónicas de Narnia: El león, la bruja y el armario",
+      "coverImage": "https://m.media-amazon.com/images/I/811Ak0T07aL._AC_UF894,1000_QL80_.jpg",
+      "sinopsis": "La historia de una joven que descubre un mundo mágico a través de un armario.",
+      "firstPage": "En el año 1872, la casa número 7 de Saville Row, Burlington Gardens -la casa en la que murió Sheridan en 1816- estaba habitada por Phileas Fogg, esq., uno de los miembros más notables y singulares del Reform Club de Londres.",
+      "genres": ["FANTASY", "CHILDREN", "ADVENTURE"]
+    }
+  }
+}
+

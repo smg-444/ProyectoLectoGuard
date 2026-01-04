@@ -13,3 +13,12 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Logs
+*.log
+firebase-debug.log
+hs_err_*.log
+replay_pid*.log
+
+# Carpetas temporales
+LectoGuard/LectoGuard/

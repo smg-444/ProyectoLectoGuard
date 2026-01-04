@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login">
+
+    <!-- Authentication Flow -->
+    <activity
+        android:id="@+id/login"
+        android:name="es.etg.lectoguard.ui.view.LoginActivity"
+        android:label="@string/login" />
+    
+    <activity
+        android:id="@+id/signUp"
+        android:name="es.etg.lectoguard.ui.view.SignUpActivity"
+        android:label="@string/sign_up" />
+
+    <!-- Main Flow -->
+    <activity
+        android:id="@+id/home"
+        android:name="es.etg.lectoguard.ui.view.HomeActivity"
+        android:label="@string/home" />
+    
+    <activity
+        android:id="@+id/savedBooks"
+        android:name="es.etg.lectoguard.ui.view.SavedBooksActivity"
+        android:label="@string/saved_books" />
+    
+    <activity
+        android:id="@+id/profile"
+        android:name="es.etg.lectoguard.ui.view.ProfileActivity"
+        android:label="@string/profile" />
+    
+    <activity
+        android:id="@+id/feed"
+        android:name="es.etg.lectoguard.ui.view.FeedActivity"
+        android:label="@string/feed" />
+
+    <!-- Book Details -->
+    <activity
+        android:id="@+id/saveBook"
+        android:name="es.etg.lectoguard.ui.view.SaveBookActivity"
+        android:label="@string/book_details">
+        <argument
+            android:name="bookId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </activity>
+
+    <!-- User Management -->
+    <activity
+        android:id="@+id/searchUsers"
+        android:name="es.etg.lectoguard.ui.view.SearchUsersActivity"
+        android:label="@string/search_users" />
+    
+    <activity
+        android:id="@+id/userProfile"
+        android:name="es.etg.lectoguard.ui.view.UserProfileActivity"
+        android:label="@string/user_profile">
+        <argument
+            android:name="targetUid"
+            app:argType="string" />
+    </activity>
+
+    <!-- Chat -->
+    <activity
+        android:id="@+id/conversationsList"
+        android:name="es.etg.lectoguard.ui.view.ConversationsListActivity"
+        android:label="@string/conversations" />
+    
+    <activity
+        android:id="@+id/chat"
+        android:name="es.etg.lectoguard.ui.view.ChatActivity"
+        android:label="@string/chat">
+        <argument
+            android:name="conversationId"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="otherParticipantId"
+            app:argType="string" />
+    </activity>
+
+    <!-- Reading Lists -->
+    <activity
+        android:id="@+id/readingLists"
+        android:name="es.etg.lectoguard.ui.view.ReadingListsActivity"
+        android:label="@string/my_lists" />
+    
+    <activity
+        android:id="@+id/readingListDetail"
+        android:name="es.etg.lectoguard.ui.view.ReadingListDetailActivity"
+        android:label="@string/list_detail">
+        <argument
+            android:name="listId"
+            app:argType="string" />
+    </activity>
+    
+    <activity
+        android:id="@+id/publicReadingLists"
+        android:name="es.etg.lectoguard.ui.view.PublicReadingListsActivity"
+        android:label="@string/public_lists" />
+
+</navigation>
+
