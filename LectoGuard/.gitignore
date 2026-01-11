@@ -22,3 +22,6 @@ replay_pid*.log
 
 # Carpetas temporales
 LectoGuard/LectoGuard/
+
+.specstory/
+.specstory/**
