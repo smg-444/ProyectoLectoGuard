@@ -48,9 +48,17 @@ class UserViewModel @Inject constructor(
     val searchResults = MutableLiveData<List<UserProfile>>()
     val allUsers = MutableLiveData<List<UserProfile>>()
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String, isOnline: Boolean = true) {
         viewModelScope.launch {
-            val result = loginUseCase(email, password)
+            val result = loginUseCase(email, password, isOnline)
+            user.postValue(result)
+            loginResult.postValue(result != null)
+        }
+    }
+    
+    fun checkExistingSession() {
+        viewModelScope.launch {
+            val result = userRepository.checkExistingSession()
             user.postValue(result)
             loginResult.postValue(result != null)
         }

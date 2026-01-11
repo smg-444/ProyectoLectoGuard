@@ -25,39 +25,73 @@ class UserRepository(
     private val followService by lazy { FollowService(firestore) }
     private val storageService by lazy { StorageService(storage) }
 
-    suspend fun login(email: String, password: String): UserEntity? {
+    suspend fun login(email: String, password: String, isOnline: Boolean = true): UserEntity? {
         return try {
-            auth.signInWithEmailAndPassword(email, password).await()
-            val uid = auth.currentUser?.uid ?: return null
+            if (isOnline) {
+                // Login online con Firebase
+                auth.signInWithEmailAndPassword(email, password).await()
+                val uid = auth.currentUser?.uid ?: return null
 
-            // Asegurar perfil en Firestore
-            val existingProfile = profileService.getProfile(uid)
-            if (existingProfile == null) {
-                val profile = UserProfile(
-                    uid = uid,
-                    displayName = email.substringBefore("@"),
-                    email = email
+                // Asegurar perfil en Firestore
+                val existingProfile = profileService.getProfile(uid)
+                if (existingProfile == null) {
+                    val profile = UserProfile(
+                        uid = uid,
+                        displayName = email.substringBefore("@"),
+                        email = email
+                    )
+                    profileService.upsertProfile(profile)
+                }
+
+                // Usuario local para id entero
+                val existingLocal = userDao.getUserByEmail(email)
+                if (existingLocal != null) return existingLocal
+                val newUser = UserEntity(
+                    name = email.substringBefore("@"),
+                    email = email,
+                    phone = "",
+                    password = "",
+                    signupDate = System.currentTimeMillis().toString()
                 )
-                profileService.upsertProfile(profile)
+                val id = userDao.insert(newUser)
+                userDao.getUserById(id.toInt())
+            } else {
+                // Login offline: usar datos locales
+                Log.d("UserRepository", "Intentando login offline para: $email")
+                val localUser = userDao.getUserByEmail(email)
+                if (localUser != null) {
+                    Log.d("UserRepository", "Usuario encontrado localmente: ${localUser.name}")
+                    localUser
+                } else {
+                    Log.w("UserRepository", "Usuario no encontrado localmente")
+                    null
+                }
             }
-
-            // Usuario local para id entero
-            val existingLocal = userDao.getUserByEmail(email)
-            if (existingLocal != null) return existingLocal
-            val newUser = UserEntity(
-                name = email.substringBefore("@"),
-                email = email,
-                phone = "",
-                password = "",
-                signupDate = System.currentTimeMillis().toString()
-            )
-            val id = userDao.insert(newUser)
-            userDao.getUserById(id.toInt())
         } catch (e: FirebaseAuthException) {
             Log.e("UserRepository", "Error de autenticación: ${e.message}", e)
             null
         } catch (e: Exception) {
             Log.e("UserRepository", "Error inesperado en login: ${e.message}", e)
+            null
+        }
+    }
+    
+    suspend fun checkExistingSession(): UserEntity? {
+        return try {
+            val currentUser = auth.currentUser
+            if (currentUser != null) {
+                val email = currentUser.email
+                if (email != null) {
+                    val localUser = userDao.getUserByEmail(email)
+                    if (localUser != null) {
+                        Log.d("UserRepository", "Sesión existente encontrada: ${localUser.name}")
+                        return localUser
+                    }
+                }
+            }
+            null
+        } catch (e: Exception) {
+            Log.e("UserRepository", "Error verificando sesión: ${e.message}", e)
             null
         }
     }

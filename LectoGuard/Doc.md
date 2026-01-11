@@ -1,17 +1,3 @@
----
-
-# IES TIERNO GALVÁN – PARLA
-
-## LectoGuard - Plataforma Social para Amantes de la Lectura
-
-**Proyecto fin de Ciclo Formativo**
-
-**Autor:** Samy Mounaji Gouiss
-
-**Fecha:** 01/01/2026
-
----
-
 # Aplicación LectoGuard - Documentación
 
 ## Índice

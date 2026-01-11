@@ -11,4 +11,6 @@ object NetworkUtils {
         val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
+    
+    fun isNetworkAvailable(context: Context): Boolean = isOnline(context)
 } 
