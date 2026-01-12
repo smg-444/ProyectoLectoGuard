@@ -29,4 +29,8 @@ interface UserBookDao {
     
     @Query("SELECT * FROM user_book WHERE userId = :userId")
     suspend fun getAllUserBooks(userId: Int): List<UserBookEntity>
+    
+    // DEBUG: Query para verificar todos los libros en la tabla
+    @Query("SELECT * FROM user_book")
+    suspend fun getAllBooks(): List<UserBookEntity>
 }

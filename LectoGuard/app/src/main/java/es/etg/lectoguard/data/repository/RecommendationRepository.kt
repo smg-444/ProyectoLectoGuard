@@ -26,6 +26,30 @@ class RecommendationRepository(
         val userBooks = userBookDao.getAllUserBooks(userId)
         Log.d("RecommendationRepository", "Calculando intereses para userId=$userId, firebaseUid=$firebaseUid, total libros guardados=${userBooks.size}")
         
+        // DEBUG: Verificar todos los libros en la base de datos
+        val allUserBooks = userBookDao.getBooksByUser(userId)
+        Log.d("RecommendationRepository", "DEBUG: Total libros para userId=$userId usando getBooksByUser: ${allUserBooks.size}")
+        if (allUserBooks.isNotEmpty()) {
+            Log.d("RecommendationRepository", "DEBUG: Primeros libros encontrados: ${allUserBooks.take(3).map { "bookId=${it.bookId}, status=${it.readingStatus}" }}")
+        }
+        
+        // DEBUG: Verificar si hay libros con otros userIds (necesitamos acceso directo al DAO)
+        try {
+            // Intentar obtener todos los libros para debug
+            val debugAllBooks = userBookDao.getAllBooks()
+            Log.d("RecommendationRepository", "DEBUG: Total libros en toda la BD: ${debugAllBooks.size}")
+            if (debugAllBooks.isNotEmpty()) {
+                val userIds = debugAllBooks.map { it.userId }.distinct()
+                Log.d("RecommendationRepository", "DEBUG: userIds encontrados en BD: $userIds")
+                userIds.forEach { uid ->
+                    val count = debugAllBooks.count { it.userId == uid }
+                    Log.d("RecommendationRepository", "DEBUG: userId=$uid tiene $count libros guardados")
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("RecommendationRepository", "DEBUG: Error obteniendo todos los libros: ${e.message}")
+        }
+        
         val genreCounts = mutableMapOf<BookGenre, Int>()
         var librosLeidosCount = 0
         var librosSinGeneros = 0
