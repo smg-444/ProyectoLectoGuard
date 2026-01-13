@@ -32,7 +32,7 @@ class SaveReviewUseCaseTest {
             userName = "Test User",
             rating = 5,
             text = "Excellent book!",
-            likes = emptyList(),
+            likes = 0,
             createdAt = System.currentTimeMillis()
         )
         val expectedReviewId = "review123"
@@ -57,7 +57,7 @@ class SaveReviewUseCaseTest {
             userName = "Test User",
             rating = 5,
             text = "Excellent book!",
-            likes = emptyList(),
+            likes = 0,
             createdAt = System.currentTimeMillis()
         )
 

@@ -5,8 +5,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -26,33 +24,29 @@ class FollowUserUseCaseTest {
         // Given
         val selfUid = "user1"
         val targetUid = "user2"
-        val targetUserName = "Target User"
 
-        coEvery { repository.followUser(selfUid, targetUid, targetUserName) } returns true
+        coEvery { repository.followUser(selfUid, targetUid) } returns Unit
 
         // When
-        val result = followUserUseCase(selfUid, targetUid, targetUserName)
+        followUserUseCase(selfUid, targetUid)
 
         // Then
-        assertTrue(result)
-        coVerify(exactly = 1) { repository.followUser(selfUid, targetUid, targetUserName) }
+        coVerify(exactly = 1) { repository.followUser(selfUid, targetUid) }
     }
 
     @Test
-    fun `followUser returns false when already following`() = runBlocking {
+    fun `followUser does not follow when selfUid equals targetUid`() = runBlocking {
         // Given
         val selfUid = "user1"
-        val targetUid = "user2"
-        val targetUserName = "Target User"
+        val targetUid = "user1" // Same user
 
-        coEvery { repository.followUser(selfUid, targetUid, targetUserName) } returns false
+        coEvery { repository.followUser(selfUid, targetUid) } returns Unit
 
         // When
-        val result = followUserUseCase(selfUid, targetUid, targetUserName)
+        followUserUseCase(selfUid, targetUid)
 
         // Then
-        assertFalse(result)
-        coVerify(exactly = 1) { repository.followUser(selfUid, targetUid, targetUserName) }
+        coVerify(exactly = 1) { repository.followUser(selfUid, targetUid) }
     }
 }
 
